@@ -1,0 +1,14 @@
+[general]
+# Select the haka configuration file to use.
+configuration = "@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/rule/rule.lua"
+
+[packet]
+module = "packet/pcap"
+interfaces = "any"
+
+[log]
+module = "log/syslog"
+
+[alert]
+module = "alert/syslog"
+alert_on_stdout = no

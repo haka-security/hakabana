@@ -1,0 +1,49 @@
+.\" This Source Code Form is subject to the terms of the Mozilla Public"
+.\" License, v. 2.0. If a copy of the MPL was not distributed with this"
+.\" file, You can obtain one at http://mozilla.org/MPL/2.0/."
+.\""
+.TH HAKABANA 1 "2014" "Haka" Commands
+.SH NAME
+hakabana \- Network monitoring tool based on Haka, Elasticsearch and Kibana
+.SH DESCRIPTION
+.PP
+Network monitoring tool based on Haka, Elasticsearch and Kibana.
+.PP
+This tool uses an Haka configuration to extract various information on the
+network:
+.PP
+* Packets and connections information
+  . Source and destination IP
+  . Geographic data
+  . Protocols
+  . Bandwidth
+.PP
+* HTTP details (host, user-agent, uri...)
+.SH INSTALL
+You need an elasticsearch server (check Elasticsearch packages and documentation
+to set it up). By default, it is supposed to be available locally
+(at 127.0.0.1:9200) but this can be changed by editing the general configuration
+file.
+.PP
+On the Kibana page, you need to import the predefined dashboard (see the files
+section). This dashboard will report various information about the packets and
+connections seen on the network.
+.SH GOING FURTHER
+You are encouraged to check the Haka rules used in Hakabana. It is easily editable
+if you want to add extra information. Check Haka full documentation to get details
+and information about rule creation.
+.SH FILES
+\fB@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/rule/config.lua\fP general configuration
+of Hakabana.
+.br
+\fB@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/dashboard/Hakabana.json\fP Kibana
+dashboard.
+.br
+\fB@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/rule/*\fP Haka rules.
+.br
+.SH SEE ALSO
+\fIhaka\fR\|(1)
+.SH AUTHORS
+Team HAKA - Arkoon
+.SH COPYRIGHT
+Arkoon Network Security, OpenWide and Telecom ParisTech.

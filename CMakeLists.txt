@@ -13,6 +13,9 @@ install(DIRECTORY dashboard DESTINATION share/haka/hakabana)
 configure_file(haka.conf.in ${CMAKE_CURRENT_BINARY_DIR}/haka.conf)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/haka.conf DESTINATION share/haka/hakabana)
 
+configure_file(hakabana.1.in ${CMAKE_CURRENT_BINARY_DIR}/hakabana.1)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/hakabana.1 DESTINATION share/man/man1)
+
 set(LOCALINSTALL "${CMAKE_BINARY_DIR}/out" CACHE STRING "Default localinstall dest")
 
 add_custom_target(localinstall

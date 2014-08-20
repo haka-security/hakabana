@@ -4,6 +4,7 @@
 
 local raw = require('protocol/raw')
 local ipv4 = require('protocol/ipv4')
+local icmp = require('protocol/icmp')
 local tcp = require('protocol/tcp')
 local udp = require('protocol/udp')
 
@@ -32,6 +33,14 @@ haka.rule{
 		data.dst = pkt.dst
 		data.proto = pkt.proto
 		data.type = 'ipv4'
+	end
+}
+
+haka.rule{
+	hook = icmp.events.receive_packet,
+	eval = function (pkt)
+		local data = pkt.ip.raw.data
+		data.type = 'icmp'
 	end
 }
 

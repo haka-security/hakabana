@@ -32,6 +32,7 @@ function module.initialize(config)
 		require('/misc/hakabana/packet')
 		require('/misc/hakabana/flow')
 		require('/misc/hakabana/http')
+		require('/misc/hakabana/dns')
 	else
 		error("missing elastic search config")
 	end

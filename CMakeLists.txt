@@ -7,7 +7,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(hakabana NONE NONE)
 
-install(DIRECTORY rule DESTINATION share/haka/hakabana)
+install(FILES config.lua DESTINATION share/haka/hakabana)
+install(DIRECTORY module/ DESTINATION share/haka/modules/misc/hakabana)
 install(DIRECTORY dashboard DESTINATION share/haka/hakabana)
 
 configure_file(haka.conf.in ${CMAKE_CURRENT_BINARY_DIR}/haka.conf)

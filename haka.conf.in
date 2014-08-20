@@ -1,6 +1,6 @@
 [general]
 # Select the haka configuration file to use.
-configuration = "@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/rule/rule.lua"
+configuration = "@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/config.lua"
 
 [packet]
 module = "packet/pcap"

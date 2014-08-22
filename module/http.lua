@@ -25,9 +25,11 @@ haka.rule{
 haka.rule{
 	hook = http.events.response,
 	eval = function (http, response)
-		hakabana:update('hakabana', 'http', http.dataid, {
-			status = response.status
-		})
+		if not http.flow.ignore then
+			hakabana:update('hakabana', 'http', http.dataid, {
+				status = response.status
+			})
+		end
 	end
 }
 

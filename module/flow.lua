@@ -18,10 +18,10 @@ local function gen_flow_rules(mod)
 				hakabana:insert('hakabana', 'flow', flow.flowid, {
 					['@timestamp'] = hakabana:timestamp(pkt.ip.raw.timestamp),
 					srcip = flow.srcip,
-					srccountry = db:country(flow.srcip),
+					srccountry = geoip:country(flow.srcip),
 					srcport = flow.srcport,
 					dstip = flow.dstip,
-					dstcountry = db:country(flow.dstip),
+					dstcountry = geoip:country(flow.dstip),
 					dstport = flow.dstport,
 					state = 'open',
 					type = type or pkt.name,
@@ -47,7 +47,7 @@ local function gen_flow_rules(mod)
 		hook = mod.events.receive_packet,
 		eval = function (flow, pkt, dir)
 			local data = pkt.ip.raw.data
-
+			-- mark the packet to be ignored for reporting
 			if flow.ignore then
 				data.ignore = true
 			else

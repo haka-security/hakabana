@@ -21,7 +21,9 @@ haka.rule{
 haka.rule{
 	hook = raw.events.send_packet,
 	eval = function (pkt)
-		hakabana:insert('hakabana', 'packet', nil, pkt.data)
+		if not pkt.data.ignore then
+			hakabana:insert('hakabana', 'packet', nil, pkt.data)
+		end
 	end
 }
 

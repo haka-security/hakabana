@@ -9,10 +9,12 @@ dns.install_udp_rule(53)
 haka.rule{
 	hook = dns.events.query,
 	eval = function (dns, query)
-		hakabana:insert('hakabana', 'dns', nil, {
-			['@timestamp'] = hakabana:timestamp(haka.network_time()),
-			query = query.question['name'],
-			flow = dns.flow.flowid
-		})
+		if not dns.flow.ignore then
+			hakabana:insert('hakabana', 'dns', nil, {
+				['@timestamp'] = hakabana:timestamp(haka.network_time()),
+				query = query.question['name'],
+				flow = dns.flow.flowid
+			})
+		end
 	end
 }

@@ -3,6 +3,9 @@
 -- file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 require('misc/hakabana').initialize{
-	elasticsearch = 'http://127.0.0.1:9200'
+	elasticsearch = {
+		['host'] = "127.0.0.1",
+		['port'] = 9200
+	}
 }
 

@@ -47,6 +47,15 @@
           "type": "lucene",
           "enable": true,
           "query": "_type:flow AND state:closed"
+        },
+        "5": {
+          "id": 5,
+          "color": "#D683CE",
+          "alias": "dns",
+          "pin": false,
+          "type": "lucene",
+          "enable": true,
+          "query": "_type:dns"
         }
       },
       "ids": [
@@ -54,7 +63,8 @@
         1,
         2,
         3,
-        4
+        4,
+        5
       ]
     },
     "filter": {
@@ -114,10 +124,43 @@
           "tmode": "terms_stats",
           "tstat": "total",
           "valuefield": "len",
-          "title": "Traffic"
+          "title": "protocols"
         },
         {
-          "span": 9,
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "type",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "count",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": true,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "above",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              1
+            ]
+          },
+          "tmode": "terms",
+          "tstat": "total",
+          "valuefield": "",
+          "title": "Flows"
+        },
+        {
+          "span": 6,
           "editable": true,
           "type": "histogram",
           "loadingEditor": false,
@@ -165,12 +208,12 @@
             "1w",
             "1y"
           ],
-          "lines": false,
-          "fill": 0,
+          "lines": true,
+          "fill": 6,
           "linewidth": 3,
           "points": false,
           "pointradius": 5,
-          "bars": true,
+          "bars": false,
           "stack": true,
           "spyable": true,
           "zoomlinks": false,
@@ -201,141 +244,11 @@
       "panels": [
         {
           "error": false,
-          "span": 3,
-          "editable": true,
-          "type": "terms",
-          "loadingEditor": false,
-          "field": "type",
-          "exclude": [],
-          "missing": false,
-          "other": false,
-          "size": 10,
-          "order": "count",
-          "style": {
-            "font-size": "10pt"
-          },
-          "donut": true,
-          "tilt": false,
-          "labels": true,
-          "arrangement": "horizontal",
-          "chart": "pie",
-          "counter_pos": "above",
-          "spyable": true,
-          "queries": {
-            "mode": "selected",
-            "ids": [
-              1
-            ]
-          },
-          "tmode": "terms",
-          "tstat": "total",
-          "valuefield": "",
-          "title": "Flows"
-        },
-        {
-          "error": false,
-          "span": 4,
-          "editable": true,
-          "type": "map",
-          "loadingEditor": false,
-          "map": "world",
-          "colors": [
-            "#A0E2E2",
-            "#265656"
-          ],
-          "size": 100,
-          "exclude": [],
-          "spyable": true,
-          "queries": {
-            "mode": "selected",
-            "ids": [
-              1
-            ]
-          },
-          "title": "Destinations",
-          "field": "dstcountry"
-        },
-        {
-          "span": 5,
-          "editable": true,
-          "type": "histogram",
-          "loadingEditor": false,
-          "mode": "count",
-          "time_field": "@timestamp",
-          "value_field": null,
-          "x-axis": true,
-          "y-axis": true,
-          "scale": 1,
-          "y_format": "none",
-          "grid": {
-            "max": null,
-            "min": 0
-          },
-          "queries": {
-            "mode": "selected",
-            "ids": [
-              2,
-              4
-            ]
-          },
-          "annotate": {
-            "enable": false,
-            "query": "*",
-            "size": 20,
-            "field": "_type",
-            "sort": [
-              "_score",
-              "desc"
-            ]
-          },
-          "auto_int": true,
-          "resolution": 100,
-          "interval": "1s",
-          "intervals": [
-            "auto",
-            "1s",
-            "1m",
-            "5m",
-            "10m",
-            "30m",
-            "1h",
-            "3h",
-            "12h",
-            "1d",
-            "1w",
-            "1y"
-          ],
-          "lines": false,
-          "fill": 0,
-          "linewidth": 3,
-          "points": false,
-          "pointradius": 5,
-          "bars": true,
-          "stack": true,
-          "spyable": true,
-          "zoomlinks": true,
-          "options": true,
-          "legend": true,
-          "show_query": false,
-          "interactive": true,
-          "legend_counts": true,
-          "timezone": "browser",
-          "percentage": false,
-          "zerofill": true,
-          "derivative": false,
-          "tooltip": {
-            "value_type": "cumulative",
-            "query_as_alias": true
-          },
-          "title": "Flows"
-        },
-        {
-          "error": false,
-          "span": 12,
+          "span": 7,
           "editable": true,
           "type": "table",
           "loadingEditor": false,
-          "size": 10,
+          "size": 5,
           "pages": 5,
           "offset": 0,
           "sort": [
@@ -374,6 +287,29 @@
           },
           "normTimes": true,
           "title": "Open Flows"
+        },
+        {
+          "error": false,
+          "span": 5,
+          "editable": true,
+          "type": "map",
+          "loadingEditor": false,
+          "map": "world",
+          "colors": [
+            "#A0E2E2",
+            "#265656"
+          ],
+          "size": 100,
+          "exclude": [],
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              1
+            ]
+          },
+          "title": "LOCATIONS",
+          "field": "dstcountry"
         }
       ],
       "notice": false
@@ -387,44 +323,11 @@
       "panels": [
         {
           "error": false,
-          "span": 4,
+          "span": 3,
           "editable": true,
           "type": "terms",
           "loadingEditor": false,
-          "field": "user agent",
-          "exclude": [],
-          "missing": false,
-          "other": false,
-          "size": 10,
-          "order": "term",
-          "style": {
-            "font-size": "10pt"
-          },
-          "donut": true,
-          "tilt": false,
-          "labels": true,
-          "arrangement": "horizontal",
-          "chart": "pie",
-          "counter_pos": "above",
-          "spyable": true,
-          "queries": {
-            "mode": "selected",
-            "ids": [
-              3
-            ]
-          },
-          "tmode": "terms",
-          "tstat": "total",
-          "valuefield": "",
-          "title": "User-Agents"
-        },
-        {
-          "error": false,
-          "span": 4,
-          "editable": true,
-          "type": "terms",
-          "loadingEditor": false,
-          "field": "status",
+          "field": "query",
           "exclude": [],
           "missing": false,
           "other": false,
@@ -438,22 +341,22 @@
           "labels": true,
           "arrangement": "horizontal",
           "chart": "pie",
-          "counter_pos": "above",
+          "counter_pos": "none",
           "spyable": true,
           "queries": {
             "mode": "selected",
             "ids": [
-              3
+              5
             ]
           },
           "tmode": "terms",
           "tstat": "total",
           "valuefield": "",
-          "title": "Http Response"
+          "title": "DNS queries"
         },
         {
           "error": false,
-          "span": 4,
+          "span": 3,
           "editable": true,
           "type": "terms",
           "loadingEditor": false,
@@ -471,7 +374,7 @@
           "labels": true,
           "arrangement": "horizontal",
           "chart": "pie",
-          "counter_pos": "above",
+          "counter_pos": "none",
           "spyable": true,
           "queries": {
             "mode": "selected",
@@ -483,6 +386,72 @@
           "tstat": "total",
           "valuefield": "",
           "title": "Http Hosts"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "user agent",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "term",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": true,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              3
+            ]
+          },
+          "tmode": "terms",
+          "tstat": "total",
+          "valuefield": "",
+          "title": "HTTP User-Agents"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "status",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "count",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": true,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              3
+            ]
+          },
+          "tmode": "terms",
+          "tstat": "total",
+          "valuefield": "",
+          "title": "Http Response"
         },
         {
           "error": false,
@@ -569,7 +538,8 @@
               1,
               2,
               3,
-              4
+              4,
+              5
             ]
           },
           "style": {
@@ -614,6 +584,7 @@
       "query": "*",
       "pinned": true,
       "history": [
+        "_type:dns",
         "_type:flow AND state:closed",
         "_type:http",
         "_type:flow AND state:open",
@@ -622,8 +593,7 @@
         "_type:flow AND state:close",
         "*",
         "_type:flow aqnd state:open",
-        "_type:flow qnd state:open",
-        "proto:6"
+        "_type:flow qnd state:open"
       ],
       "remember": 10,
       "enable": true

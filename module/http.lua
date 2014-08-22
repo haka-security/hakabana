@@ -9,15 +9,16 @@ http.install_tcp_rule(80)
 haka.rule{
 	hook = http.events.request,
 	eval = function (http, request)
-		http.dataid = hakabana:genid()
-
-		hakabana:insert('hakabana', 'http', http.dataid, {
-			['@timestamp'] = hakabana:timestamp(haka.network_time()),
-			uri = request.uri,
-			['user agent'] = request.headers['User-Agent'],
-			['host'] = request.headers['Host'],
-			flow = http.flow.flowid
-		})
+		if not http.flow.ignore	then
+			http.dataid = hakabana:genid()
+			hakabana:insert('hakabana', 'http', http.dataid, {
+				['@timestamp'] = hakabana:timestamp(haka.network_time()),
+				uri = request.uri,
+				['user agent'] = request.headers['User-Agent'],
+				['host'] = request.headers['Host'],
+				flow = http.flow.flowid
+			})
+		end
 	end
 }
 
@@ -29,3 +30,4 @@ haka.rule{
 		})
 	end
 }
+

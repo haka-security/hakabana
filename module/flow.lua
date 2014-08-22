@@ -18,10 +18,10 @@ local function gen_flow_rules(mod)
 				hakabana:insert('hakabana', 'flow', flow.flowid, {
 					['@timestamp'] = hakabana:timestamp(pkt.ip.raw.timestamp),
 					srcip = flow.srcip,
-					srccountry = geoip.country(flow.srcip),
+					srccountry = db:country(flow.srcip),
 					srcport = flow.srcport,
 					dstip = flow.dstip,
-					dstcountry = geoip.country(flow.dstip),
+					dstcountry = db:country(flow.dstip),
 					dstport = flow.dstport,
 					state = 'open',
 					type = type or pkt.name,

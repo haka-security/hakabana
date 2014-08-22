@@ -48,7 +48,8 @@ function module.initialize(config)
 			end
 		}
 
-		geoip = require('misc/geoip')
+		local geoip = require('misc/geoip')
+		db = geoip.open('/usr/share/GeoIP/GeoIP.dat')
 
 		-- do not monitor elasticsearch traffic
 		module.ignore_flow(tcp_conn, function (flow)

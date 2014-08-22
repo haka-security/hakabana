@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 2.8)
 project(hakabana NONE NONE)
 
 install(FILES config.lua DESTINATION share/haka/hakabana)
-install(FILES hakabana-clean.sh DESTINATION /bin)
+install(FILES hakabana-clean DESTINATION /bin)
 install(DIRECTORY module/ DESTINATION share/haka/modules/misc/hakabana)
 install(DIRECTORY dashboard DESTINATION share/haka/hakabana)
 
@@ -17,6 +17,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/haka.conf DESTINATION share/haka/hakab
 
 configure_file(hakabana.1.in ${CMAKE_CURRENT_BINARY_DIR}/hakabana.1)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/hakabana.1 DESTINATION share/man/man1)
+install(FILES hakabana-clean.1 DESTINATION share/man/man1)
 
 set(LOCALINSTALL "${CMAKE_BINARY_DIR}/out" CACHE STRING "Default localinstall dest")
 

@@ -19,6 +19,7 @@ network:
   . Bandwidth
 .PP
 * HTTP details (host, user-agent, uri...)
+* DNS queries
 .SH INSTALL
 You need an elasticsearch server (check Elasticsearch packages and documentation
 to set it up). By default, it is supposed to be available locally
@@ -33,16 +34,17 @@ You are encouraged to check the Haka rules used in Hakabana. It is easily editab
 if you want to add extra information. Check Haka full documentation to get details
 and information about rule creation.
 .SH FILES
-\fB@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/rule/config.lua\fP general configuration
+\fB@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/config.lua\fP general configuration
 of Hakabana.
 .br
 \fB@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/dashboard/Hakabana.json\fP Kibana
 dashboard.
 .br
-\fB@CMAKE_INSTALL_PREFIX@/share/haka/hakabana/rule/*\fP Haka rules.
+\fB@CMAKE_INSTALL_PREFIX@/share/haka/modules/misc/hakabana\fP Hakabana module
 .br
 .SH SEE ALSO
 \fIhaka\fR\|(1)
+\fIhakabana-clean\fR\|(1)
 .SH AUTHORS
 Team HAKA - Arkoon
 .SH COPYRIGHT

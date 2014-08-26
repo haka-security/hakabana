@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 2.8)
 project(hakabana NONE NONE)
 
 install(FILES config.lua DESTINATION share/haka/hakabana)
-install(FILES hakabana-clean DESTINATION /bin)
+install(PROGRAMS hakabana-clean DESTINATION bin)
 install(DIRECTORY module/ DESTINATION share/haka/modules/misc/hakabana)
 install(DIRECTORY dashboard DESTINATION share/haka/hakabana)
 

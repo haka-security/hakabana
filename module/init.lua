@@ -45,6 +45,14 @@ function module.initialize(config)
 								index = 'not_analyzed'
 							}
 						}
+					},
+					dns = {
+						properties = {
+							['query'] = {
+								type = 'string',
+								index = 'not_analyzed'
+							}
+						}
 					}
 				},
 			})

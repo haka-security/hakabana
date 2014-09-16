@@ -5,6 +5,12 @@
 local tcp_conn = require('protocol/tcp_connection')
 local udp_conn = require('protocol/udp_connection')
 
+local function resolve_geo(ip)
+	if geoip then
+		return geoip:country(ip)
+	end
+end
+
 local function gen_flow_rules(mod)
 	haka.rule{
 		hook = mod.events.new_connection,
@@ -18,10 +24,10 @@ local function gen_flow_rules(mod)
 				hakabana:insert('hakabana', 'flow', flow.flowid, {
 					['@timestamp'] = hakabana:timestamp(pkt.ip.raw.timestamp),
 					srcip = flow.srcip,
-					srccountry = geoip:country(flow.srcip),
+					srccountry = resolve_geo(flow.srcip),
 					srcport = flow.srcport,
 					dstip = flow.dstip,
-					dstcountry = geoip:country(flow.dstip),
+					dstcountry = resolve_geo(flow.dstip),
 					dstport = flow.dstport,
 					state = 'open',
 					type = type or pkt.name,

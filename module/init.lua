@@ -26,11 +26,11 @@ function module.initialize(config)
 
 	local es_host = es_conf.host
 	local es_port = es_conf.port or 9200
+	local elastricsearch = require('misc/elasticsearch')
 
 	haka.rule{
 		hook = haka.events.started,
 		eval = function ()
-			local elastricsearch = require('misc/elasticsearch')
 			hakabana = elastricsearch.connector('http://' .. es_host .. ':' .. es_port)
 			hakabana:newindex("hakabana", {
 				mappings = {

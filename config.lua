@@ -5,8 +5,7 @@
 require('misc/hakabana').initialize{
 	elasticsearch = {
 		host = "127.0.0.1",
-		port = 9200,
-		geoip_data = '/usr/share/GeoIP/GeoIP.dat'
-	}
+		port = 9200
+	},
+	geoip_data = '/usr/share/GeoIP/GeoIP.dat'
 }
-

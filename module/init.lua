@@ -19,13 +19,13 @@ function module.ignore_flow(conn, check)
 end
 
 function module.initialize(config)
-	local es_conf = config['elasticsearch']
+	local es_conf = config.elasticsearch
 	if not es_conf then
 		error("missing elastic search config")
 	end
 
-	local es_host = config['elasticsearch'].host
-	local es_port = config['elasticsearch'].port or 9200
+	local es_host = es_conf.host
+	local es_port = es_conf.port or 9200
 
 	haka.rule{
 		hook = haka.events.started,
@@ -59,8 +59,10 @@ function module.initialize(config)
 		end
 	}
 
-	local geoip_module = require('misc/geoip')
-	geoip = geoip_module.open(es_conf.geoip_data)
+	if config.geoip_data then
+		local geoip_module = require('misc/geoip')
+		geoip = geoip_module.open(config.geoip_data)
+	end
 
 	-- do not monitor elasticsearch traffic
 	local es_ip = ipv4.addr(es_host)

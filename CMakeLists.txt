@@ -31,17 +31,20 @@ add_custom_target(localinstall
 # CPack default Packaging
 include(version.cmake)
 
-# Add a build tag from the Git information
-execute_process(COMMAND git symbolic-ref -q --short HEAD WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-	OUTPUT_VARIABLE BUILD_BRANCH RESULT_VARIABLE HAD_ERROR OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-execute_process(COMMAND git describe --dirty --always WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-	OUTPUT_VARIABLE BUILDTAG RESULT_VARIABLE HAD_ERROR OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-if(HAD_ERROR EQUAL 0)
-	set(HAKABANA_VERSION_BUILD "+${BUILDTAG}")
-	execute_process(COMMAND echo "set(HAKABANA_VERSION_BUILD \"${HAKABANA_VERSION_BUILD}\")"
-		OUTPUT_FILE ${CMAKE_SOURCE_DIR}/buildtag.cmake)
-else()
-	include(buildtag.cmake OPTIONAL)
+set(GITTAG "yes" CACHE STRING "Append git tag to build number")
+if(GITTAG STREQUAL "yes")
+	# Add a build tag from the Git information
+	execute_process(COMMAND git symbolic-ref -q --short HEAD WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+		OUTPUT_VARIABLE BUILD_BRANCH RESULT_VARIABLE HAD_ERROR OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
+	execute_process(COMMAND git describe --dirty --always WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+		OUTPUT_VARIABLE BUILDTAG RESULT_VARIABLE HAD_ERROR OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
+	if(HAD_ERROR EQUAL 0)
+		set(HAKABANA_VERSION_BUILD "+${BUILDTAG}")
+		execute_process(COMMAND echo "set(HAKABANA_VERSION_BUILD \"${HAKABANA_VERSION_BUILD}\")"
+			OUTPUT_FILE ${CMAKE_SOURCE_DIR}/buildtag.cmake)
+	else()
+		include(buildtag.cmake OPTIONAL)
+	endif()
 endif()
 
 set(CPACK_GENERATOR "TGZ")

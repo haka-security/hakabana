@@ -1,0 +1,23 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+#!/bin/bash
+
+if [[ -n "$1" ]]; then
+	res=$(curl -s -XDELETE $1/hakabana)
+	if [[ -z $res ]]; then
+		echo "$0: cannot connect to elasticsearch server $1"
+		exit 0
+	fi
+	if [ "$res" == '{"acknowledged":true}' ]; then
+		echo "hakabana index removed successfully"
+	elif [[ "$res" == {\"error\":\"IndexMissingException* ]]; then
+		echo "$0: missing 'hakabana' index"
+	else
+		echo "$0: failed to remove hakabana index\n$res"
+	fi
+else
+	echo "usage: $0 <http://elasticsearch-server[:port]>"
+fi
+
